@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:1.23.16
+    restart: always
+    ports:
+      - "8086:3001"
+    volumes:
+      - ./uptime-kuma:/app/data
+    environment:
+      - UPTIME_KUMA_DISABLE_FRAME_OPTIONS=${UPTIME_KUMA_DISABLE_FRAME_OPTIONS}

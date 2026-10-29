@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  bookstack:
+    image: solidnerd/bookstack:26.5.4
+    restart: always
+    ports:
+      - "8088:8080"
+    environment:
+      DB_HOST: bookstack-db
+      DB_DATABASE: bookstackapp
+      DB_USERNAME: bookstack
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      APP_URL: ${APP_URL}
+      APP_KEY: ${APP_KEY}
+    depends_on:
+      - bookstack-db
+
+  bookstack-db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: bookstackapp
+      MYSQL_USER: bookstack
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./bookstack_db:/var/lib/mysql

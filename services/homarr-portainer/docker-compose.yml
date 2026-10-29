@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  homarr:
+    image: ghcr.io/ajnart/homarr:0.15.10
+    restart: always
+    ports:
+      - "8085:7575"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./homarr/configs:/app/data/configs
+      - ./homarr/icons:/app/public/icons
+
+  portainer:
+    image: portainer/portainer-ce:2.20.3
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:

@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  snipe-db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: snipe
+      MYSQL_USER: snipe
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - snipe_db:/var/lib/mysql
+
+  snipe-it:
+    image: snipe/snipe-it:v6.0.10
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY}
+      APP_URL: ${APP_URL}
+      DB_CONNECTION: mysql
+      DB_HOST: snipe-db
+      DB_PORT: 3306
+      DB_DATABASE: snipe
+      DB_USERNAME: snipe
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      - snipe-db
+
+volumes:
+  snipe_db:

@@ -1,0 +1,49 @@
+﻿# 🏢 Office Infrastructure (Air-Gapped)
+
+Изолированная (air-gapped) офисная инфраструктура на базе Docker Compose.
+Развёрнута в локальной сети организации, без доступа из интернета.
+
+## Состав стека
+
+| Сервис | Назначение | Порт |
+|---|---|---|
+| Nextcloud + ONLYOFFICE | Файлы, онлайн-редактор | 80, 8080 |
+| Snipe-IT | Учёт IT-оборудования | 8082 |
+| BookStack | База знаний | 8088 |
+| Stirling PDF | Работа с PDF, OCR | 8090 |
+| Uptime Kuma | Мониторинг | 8086 |
+| Homarr | Дашборд | 8085 |
+| Portainer | Управление Docker | 9000 |
+
+## Быстрый старт
+
+1. Установить Docker и Docker Compose.
+2. Склонировать репозиторий.
+3. В каждой папке `services/<сервис>/`: `cp .env.example .env`, заполнить.
+4. `docker compose up -d` в каждой папке.
+
+## Требования
+
+- Debian 12 / Ubuntu Server 22.04
+- RAM: 6 ГБ (рекомендуется), минимум 4 ГБ
+- CPU: 2 ядра
+- Диск: от 50 ГБ
+
+## Документация
+
+- [docs/architecture.md](docs/architecture.md) - архитектура
+- [docs/services.md](docs/services.md) - карта сервисов
+- [docs/network.md](docs/network.md) - сеть и порты
+- [docs/runbooks.md](docs/runbooks.md) - типовые операции
+- [docs/changes.md](docs/changes.md) - журнал изменений
+
+## Безопасность
+
+- Сервер не имеет доступа в интернет.
+- Публичные ссылки Nextcloud отключены.
+- Пароли хранятся в `.env` (Осторожно).
+- Версии образов зафиксированы.
+
+## Лицензия
+
+MIT

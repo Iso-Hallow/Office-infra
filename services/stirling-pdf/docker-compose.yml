@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf:0.36.6
+    restart: always
+    ports:
+      - "8090:8080"
+    volumes:
+      - ./trainingData:/usr/share/tessdata
+      - ./extraConfigs:/configs
+      - ./logs:/logs
+    environment:
+      - SYSTEM_MAXFILESIZE=${SYSTEM_MAXFILESIZE}
+      - DOCKER_ENABLE_SECURITY=${DOCKER_ENABLE_SECURITY}
